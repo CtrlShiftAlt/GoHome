@@ -1,12 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="index-mobile.css" media="screen and (max-width: 600px)">
+    <link rel="stylesheet" href="index-tablet.css" media="screen and (min-width: 601px) and (max-width:1024px)">
+    <link rel="stylesheet" href="index-desktop.css" media="screen and (min-width: 1025px)">
     <script src="index.js"></script>
+    <title>Title</title>
 </head>
+
 <body>
-    Go Home
+    <header>
+        <div class="bottom-bg"></div>
+        <div class="header-container">
+            <div class="header-nav">
+                <div style="font-size: 20px">田</div>
+                <div style="font-size: 1.5rem;">Semiconductor</div>
+                <div style="font-size: 1rem; color: #000;"><span>My Account</span></div>
+            </div>
+            <div class="header-nav-desktop">
+                <div class="top-nav">
+                    <div class="language-img">🏴‍☠️</div>
+                    <div class="language">English</div>
+                    <div>∨</div>
+                </div>
+            </div>
+            <search class="search">
+                <div class="big-logo-desktop">
+                    <div class="logo"><img src="logo.webp" alt=""></div>
+                </div>
+                <div class="search-box">
+                    <input class="search-input" placeholder="Enter a keyword to search for products" />
+                    <span class="search-button">🔍</span>
+                </div>
+                <div class="account-desktop"> sssswerasdf </div>
+            </search>
+        </div>
+    </header>
+    <nav>
+        <style>
+            .selected-items {
+                display: flex;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+            }
+
+            .selected-items div {
+                background-color: #e0e0e0;
+                padding: 5px;
+                margin: 3px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+            }
+
+            .delete-btn {
+                margin-left: 5px;
+                cursor: pointer;
+                color: red;
+            }
+        </style>
+        <div class="selected-items" id="selectedItems"></div>
+        <input type="text" id="multiSelectInput" list="suggestions">
+        <datalist id="suggestions">
+            <option value="Option 1">
+            <option value="Option 2">
+            <option value="Option 3">
+        </datalist>
+        <script>
+            const input = document.getElementById("multiSelectInput")
+            const selectedItems = document.getElementById("selectedItems")
+            let selectedValues = [];
+            input.addEventListener('change', function () {
+                const value = this.value.trim()
+                if (value
+                    && !selectedValues.includes(value)
+                    && !Array.from(selectedItems.children).some(div => div.textContent.trim() === value + ' x')) {
+
+                    const itemDiv = document.createElement("div")
+                    itemDiv.textContent = value + ' ';
+                    const deleteBtn = document.createElement("span");
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.textContent = 'x';
+                    deleteBtn.onclick = function () {
+                        itemDiv.remove();
+                        const index = selectedValues.indexOf(value);
+                        if (index > -1) {
+                            selectedValues.splice(index, 1);
+                        }
+                    };
+                    itemDiv.appendChild(deleteBtn);
+                    selectedItems.appendChild(itemDiv);
+                    selectedValues.push(value);
+                }
+                this.value = '';
+            })
+        </script>
+    </nav>
+    <main>
+        <section style="height:100px;">
+            <div>123123</div>
+        </section>
+    </main>
+    <footer>
+        <div>line</div>
+    </footer>
 </body>
+
 </html>
